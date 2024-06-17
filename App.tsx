@@ -44,26 +44,59 @@ const inputArraysData = [
 function App() {
 return (
   <>
-  <CheckBoxWithAccordion 
-  title={{
-    type: 'checkbox',
-    heading: 'Companies'
-  }}
-  body={inputArraysData}
-  onChange = {(selectedItems) => console.log(selectedItems)}
-  />
-  <br />
-  <br />
-  <br />
-
   {/* <CheckBoxWithAccordion 
   title={{
     type: 'checkbox',
     heading: 'Companies'
   }}
-  body={inputArraysData}
+  body={{type: 'checkbox', content: inputArraysData}}
   onChange = {(selectedItems) => console.log(selectedItems)}
   /> */}
+  <br />
+  <br />
+  <br />
+
+  <CheckBoxWithAccordion 
+  title={{
+    heading: 'Companies'
+  }}
+  body={{
+    content: <>Hello This is body content hehehheh</>
+  }}
+  />
+
+
+<br />
+<br />
+
+<CheckBoxWithAccordion 
+  title={{
+    heading: 'Companies'
+  }}
+  body={{type: 'checkbox', content: inputArraysData.map((el, index) => ({...el, id: el.id+index}))}}
+  onChange = {(selectedItems) => console.log(selectedItems)}
+  />
+
+<br />
+<br />
+
+<CheckBoxWithAccordion 
+  title={{
+    heading: 'Companies'
+  }}
+  body={{
+    content: <CheckBoxWithAccordion 
+    title={{
+      type: 'checkbox',
+      heading: 'IT Companies'
+    }}
+    body={{type: 'checkbox', content: inputArraysData}}
+    onChange = {(selectedItems) => console.log(selectedItems)}
+    />
+  }}
+  onChange = {(selectedItems) => console.log(selectedItems)}
+  />
+
 
   </>
 )
