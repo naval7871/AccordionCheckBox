@@ -34,7 +34,7 @@ export default function CheckBoxWithAccordion({
   onChange = () => {}
 }: CheckBoxWithAccordionI) {
   const [isOpen, setIsOpen] = useState(defaultExpanded);
-  const [selectedItems, setSelectedItems] = useState(body);
+  const [selectedItems, setSelectedItems] = useState(body.content);
   const [isParentSelected, setIsParentSelected] = useState(false);
 //   const [state, dispatch] = useReducer(reducer, null, initialState())
 
@@ -68,11 +68,15 @@ export default function CheckBoxWithAccordion({
                     const newState = selectedItems.map(items => ({...items, checked: true}))
                     setIsParentSelected(true)
                     setSelectedItems(newState)
+                onChange(newState)
+
                 }
                 else {
                     const newState = selectedItems.map(items => ({...items, checked: false}))
                     setIsParentSelected(false)
                     setSelectedItems(newState)
+                onChange(newState)
+
                 }
             }
           }}
@@ -116,21 +120,23 @@ export default function CheckBoxWithAccordion({
   }
 
   function bodyElement() {
-    return (
+  return (
       <div
         style={{
           padding: "11px 8px 11px 16px",
           display: isOpen ? "block" : "none",
         }}
       >
-        {selectedItems.map((el, index) => {
+        {
+          body.type === 'checkbox' ? selectedItems.map((el, index) => {
           return (
             <div key={el.id}>
                 {checkBox(el.label, el.id, el.value, el.checked, el.disabled, el.label, 'child')}
               
             </div>
           );
-        })}
+        }): <>{body.content}</>
+    }
       </div>
     );
   }
